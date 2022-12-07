@@ -17,9 +17,17 @@ moves_part = parts[1].split("\n")
 moves = list(map(lambda x: x.replace("move ", "").replace(" from ", ",").replace(" to ", ",").split(","), moves_part))
 
 # Moves on Stacks
-s = stacks[:]
+s1 = stacks[:]
 for move in moves:
-    s[int(move[2])-1] = list(reversed(s[int(move[1])-1][:int(move[0])])) + s[int(move[2])-1]
-    s[int(move[1])-1] = s[int(move[1])-1][int(move[0]):] if int(move[0]) < len(s[int(move[1])-1]) else []
+    s1[int(move[2])-1] = list(reversed(s1[int(move[1])-1][:int(move[0])])) + s1[int(move[2])-1]
+    s1[int(move[1])-1] = s1[int(move[1])-1][int(move[0]):] if int(move[0]) < len(s1[int(move[1])-1]) else []
 
-res = "".join(list(map(lambda x: x[0], s)))
+res1 = "".join(list(map(lambda x: x[0], s1)))
+
+
+s2 = stacks[:]
+for move in moves:
+    s2[int(move[2])-1] = list(s2[int(move[1])-1][:int(move[0])]) + s2[int(move[2])-1]
+    s2[int(move[1])-1] = s2[int(move[1])-1][int(move[0]):] if int(move[0]) < len(s2[int(move[1])-1]) else []
+
+res2 = "".join(list(map(lambda x: x[0], s2)))
